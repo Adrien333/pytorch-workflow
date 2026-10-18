@@ -25,15 +25,15 @@ def plot_predictions(train_data = X_train,
                      train_label = y_train,
                      test_data = X_test,
                      test_label = y_test,
-                     Predictions = None):
+                     predictions = None):
     '''
     plot and compare training and test data and predictions
     '''
     plt.figure(figsize=(10, 7))
     plt.scatter(train_data, train_label,c="b", s=4, label="training data")
     plt.scatter(test_data, test_label,c="r", s=4, label="test data")
-    if Predictions is not None:
-     plt.scatter(test_data, Predictions,c="g", s=4 , label = Predictions)
+    if predictions is not None:
+     plt.scatter(test_data, predictions,c="g", s=4 , label = "Predictions")
     plt.legend()
     plt.show()
 
@@ -41,13 +41,13 @@ plot_predictions()
 
 #linear regression model implementation
 
-class linear_reg(nn.module):
+class linear_reg(nn.Module):
    def __init__(self):
       super().__init__()
-      self.weights = nn.Parameters(torch.randn(1,requires_grad = True, dtype=torch.float))
-      self.bias =  nn.Parameters(torch.randn(1,requires_grad = True, dtype=torch.float))
+      self.weights = nn.Parameter(torch.randn(1, dtype=torch.float))
+      self.bias =  nn.Parameter(torch.randn(1, dtype=torch.float))
       
    #forwards method def to perform computations in the models 
    def forward(self, x: torch.Tensor)->torch.Tensor:
-     return self.weights * X + self.bias
+     return self.weights * x + self.bias
 
