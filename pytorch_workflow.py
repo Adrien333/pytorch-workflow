@@ -47,6 +47,7 @@ class linear_reg(nn.module):
       self.weights = nn.Parameters(torch.randn(1,requires_grad = True, dtype=torch.float))
       self.bias =  nn.Parameters(torch.randn(1,requires_grad = True, dtype=torch.float))
       
-      #forwar method def to perform computations in the models 
-      def forwards(self, x: torch.Tensor)->torch.Tensor:
+   #forwards method def to perform computations in the models 
+   def forwards(self, x: torch.Tensor)->torch.Tensor:
+     return self.weights * X + self.bias
 
