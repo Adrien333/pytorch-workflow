@@ -51,3 +51,15 @@ class linear_reg(nn.Module):
    def forward(self, x: torch.Tensor)->torch.Tensor:
      return self.weights * x + self.bias
 
+#create a seed
+torch.manual_seed(42)
+
+#create instance of the model
+model1 = linearRegression()
+
+with torch.inference_mode():#deactivate the gradient tracking
+   y_predictions= model1(X_test) #Triggers internal PyTorch hooks, 
+                                 #sets up tracking, and then calls the model's 
+                                 # custom forward(X_test) method to process the sor and generate the predicted outputs
+
+
