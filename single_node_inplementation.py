@@ -55,7 +55,7 @@ class linear_reg(nn.Module):
 torch.manual_seed(42)
 
 #create instance of the model
-model1 = linearRegression()
+model1 = linear_Reg()
 
 with torch.inference_mode():#deactivate the gradient tracking
    y_predictions= model1(X_test) #Triggers internal PyTorch hooks, 
