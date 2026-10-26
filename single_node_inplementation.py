@@ -3,7 +3,7 @@ from torch import nn
 import matplotlib.pyplot as plt
 
 
-#parameters the neeural network will have to find
+#parameters the neural network will have to find
 weight=0.7
 bias=0.3
 
@@ -13,7 +13,6 @@ end=1
 step=0.02
 X = torch.arange (start,end, step).unsqueeze(dim=1)
 y= weight  * X + bias
-#print(X[:10], y[:10], len(X), len(y))
 
 # splitting data into training and test sets
 train_split= int(0.8 * len(X)) 
@@ -37,7 +36,6 @@ def plot_predictions(train_data = X_train,
     plt.legend()
     plt.show()
 
-plot_predictions()
 
 #linear regression model implementation
 
@@ -66,10 +64,14 @@ with torch.inference_mode():#deactivate the gradient tracking
 lossf=nn.L1Loss()
 
 #optimizer
-optimizer= torch.optim.SGD(params=model1.parameters())
+optimizer= torch.optim.SGD(params=model1.parameters(), lr=0.01)
 
 #training loop
-epochs=1
+epochs=1000
+
+with torch.inference_mode():
+ pred = model1(X_test)
+plot_predictions(predictions = pred)
 
 #LOOP THROUGH THE DATA
 for epoch in range(epochs):
@@ -90,7 +92,16 @@ for epoch in range(epochs):
    #step 5: step the optimizer
    optimizer.step()
 
+   #print(model1.state_dict())
+   #print(f"Loss : {loss}")
+
    model1.eval()
+
+
+with torch.inference_mode():
+   newpred = model1(X_test)
+
+plot_predictions(predictions = newpred)
 
 
 
