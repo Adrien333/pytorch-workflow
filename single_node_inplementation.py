@@ -60,6 +60,38 @@ model1 = linearRegression()
 with torch.inference_mode():#deactivate the gradient tracking
    y_predictions= model1(X_test) #Triggers internal PyTorch hooks, 
                                  #sets up tracking, and then calls the model's 
-                                 # custom forward(X_test) method to process the sor and generate the predicted outputs
+                                 # custom forward(X_test) method to process the tensor and generate the predicted outputs
+
+#loss function
+lossf=nn.L1Loss()
+
+#optimizer
+optimizer= torch.optim.SGD(params=model1.parameters())
+
+#training loop
+epochs=1
+
+#LOOP THROUGH THE DATA
+for epoch in range(epochs):
+   model1.train() # model on training mode
+
+   #step 1: forward pass
+   y_pred= model1(X_train)
+
+   #step 2: calculate the loss
+   loss = lossf(y_pred, y_train)
+
+   #step 3: optimizer 0 grad
+   optimizer.zero_grad()
+
+   #step 4: backpro
+   loss.backward()
+
+   #step 5: step the optimizer
+   optimizer.step()
+
+   model1.eval()
+
+
 
 
