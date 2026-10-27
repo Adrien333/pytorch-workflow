@@ -67,7 +67,7 @@ lossf=nn.L1Loss()
 optimizer= torch.optim.SGD(params=model1.parameters(), lr=0.01)
 
 #training loop
-epochs=1000
+epochs=200
 
 with torch.inference_mode():
  pred = model1(X_test)
