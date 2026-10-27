@@ -92,8 +92,9 @@ for epoch in range(epochs):
    #step 5: step the optimizer
    optimizer.step()
 
-   #print(model1.state_dict())
-   #print(f"Loss : {loss}")
+   if epoch % 10 == 0:
+    print(model1.state_dict())
+    print(f"Loss : {loss}")
 
    model1.eval()
 
