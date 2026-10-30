@@ -1,0 +1,3 @@
+from sklearn.datasets import make_circles
+n_samples = 100
+X, y = make_circles(n_samplesnoise=0.1, factor=0.5, random_state=42)
